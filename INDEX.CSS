@@ -231,13 +231,13 @@ footer .sprite2 {
 }
 
 .sprite1 {
-  background: url('../images/social-media-logos-icons-set_69286-203.avif') 
+  background: url('social-media-logos-icons-set_69286-203.avif') 
   no-repeat -524px -64px;
   width: 20px;
   height: 32px;
 }
 .sprite2 {
-	background: url('../images/social-media-logos-icons-set_69286-203.avif') 
+	background: url('social-media-logos-icons-set_69286-203.avif') 
   no-repeat -439px -180px;
 	width: 27px;
 	height: 30px;
