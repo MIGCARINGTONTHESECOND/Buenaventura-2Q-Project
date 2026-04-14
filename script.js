@@ -1,0 +1,235 @@
+function validateForm() {
+
+    // ===== assign Elements =====
+
+    const fullNameInput = document.getElementById("fullName");
+    const emailInput = document.getElementById("email");
+    const sexRadios = document.getElementsByName("sex");
+    const usernameInput = document.getElementById("username");
+    const passwordInput = document.getElementById("password");
+    const confirmPasswordInput = document.getElementById("confirmPassword");
+    const cuisineInput = document.getElementById("cuisine");
+    const birthdateInput = document.getElementById("birthdate");
+
+    // ===== clear or erases errors ====
+
+    document.getElementById("EmailError").innerHTML = "";
+    document.getElementById("UsernameError").innerHTML = "";
+    document.getElementById("PasswordError").innerHTML = "";
+    document.getElementById("confirmPasswordError").innerHTML = "";
+    document.getElementById("cuisineError").innerHTML = "";
+    document.getElementById("dietError").innerHTML = "";
+    document.getElementById("successMessage").innerHTML = "";
+    document.getElementById("BdateError").innerHTML = "";
+    document.getElementById("sexError").innerHTML = "";
+    document.getElementById("FnameError").innerHTML = "";
+    document.getElementById("cookError").innerHTML = "";
+
+    // ===== validation assigned to true initially =====
+    let isValid = true;
+
+    // ===== GET VALUES =====
+
+    let fullName = fullNameInput.value.trim();
+    let email = emailInput.value.trim();
+    let username = usernameInput.value.trim();
+    let password = passwordInput.value;
+    let confirmPassword = confirmPasswordInput.value;
+    let cuisine = cuisineInput.value;
+    let birthdate = birthdateInput.value;
+
+    // ===== PERSONAL INFORMATIONN ===========================
+
+    // Full Name checker
+    if (fullName.length === 0) {
+        document.getElementById("FnameError").innerHTML =
+            "Full name is required.";
+        isValid = false;
+    } 
+    
+    if (fullName.length>0) {
+        if (fullName.length < 2) {
+        document.getElementById("FnameError").innerHTML =
+            "Full name must be at least 2 characters.";
+        isValid = false;
+    }
+    }
+
+
+    // Birthdate checker
+
+    if (birthdate === "") {
+        document.getElementById("BdateError").innerHTML =
+            "Please enter your birthdate.";
+        isValid = false;
+
+    } else {
+        let today = new Date();
+        let birth = new Date(birthdate);
+        //subtracts the birth year from the current year to get the age
+        let age = today.getFullYear() - birth.getFullYear();
+
+        // checks if less than 13 years old and if their birthday not yet happened this year, I decided to subtract 1 from age
+        let monthchecker = today.getMonth() - birth.getMonth();
+        if (
+            monthchecker < 0 ||
+            (monthchecker === 0 && today.getDate() < birth.getDate())
+        ) {
+            age = age -1;
+        }
+
+        if (age < 13) {
+            document.getElementById("BdateError").innerHTML = "You must be at least 13 years old.";
+            isValid = false;
+        }
+    }
+
+    // Check Sex using radio buttons, use sexchosen to scan if there is a chosen sex. If false, it will say error and set isValid to false.
+    let sexChosen = false;
+
+    for (let i = 0; i < sexRadios.length; i++) {
+        if (sexRadios[i].checked) {
+            sexChosen = true;
+        }
+    }
+
+    if (sexChosen === false) {
+        document.getElementById("sexError").innerHTML = "Please select your sex.";
+        isValid = false;
+    }
+
+    // Email checker
+    if (email.length === 0) {
+        document.getElementById("EmailError").innerHTML =
+            "Email is required.";
+        isValid = false;
+    }
+    // Runs a for loop to check if the email contains "@" and ".". If it does, it will say error and set isValid to false.
+
+    for (let i = 0; i < email.length; i++) {
+        if (email[i] === "@") {
+            document.getElementById("EmailError").innerHTML ="Kindly enter a actual email address.";
+            isValid = false;
+        } 
+        if (email[i] === ".") {
+            document.getElementById("EmailError").innerHTML =   "Kindly enter a actual email address.";
+            isValid = false;
+        }
+
+    // ===== ACCOUNT DETAILS ==== 
+
+    // Username checker if username length is 0, less than 8, more than 20, or contains special characters. It will say error and set isValid to false.
+    if (username.length == 0) {
+        document.getElementById("UsernameError").innerHTML =  "Kindly input your username.";
+        isValid = false;
+    }
+
+    if (username.length < 8 || username.length > 20) {
+        document.getElementById("UsernameError").innerHTML =   "Username must be between 8 and 20 characters.";
+        isValid = false;
+    }
+
+    const pattern = /^[a-zA-Z0-9]+$/;
+    if (!pattern.test(username)) {
+        document.getElementById("UsernameError").innerHTML =
+            "Username may only contain letters and numbers.";
+        isValid = false;
+    }
+
+    // Password
+    if (password.length == 0) {
+        document.getElementById("PasswordError").innerHTML =
+            "Password is required.";
+        isValid = false;
+    }
+
+    if (password.length < 10) {
+        document.getElementById("PasswordError").innerHTML =
+            "Password must be at least 10 characters.";
+        isValid = false;
+    }
+
+    // If password does not contain an uppercase letter, it will say error and set isValid to false.
+    if (!/[A-Z]/.test(password)) {
+        document.getElementById("PasswordError").innerHTML =
+            "Password requires an uppercase letter.";
+        isValid = false;
+    }
+
+    // If password does not contain a lowercase letter, it will  say error and set isValid to false
+    if (!/[a-z]/.test(password)) {
+        document.getElementById("PasswordError").innerHTML =
+            "Password requires a lowercase letter.";
+        isValid = false;
+    }
+
+    // If password does not contain a number, it will say error and set isValid to false
+    if (!/[0-9]/.test(password)) {
+        document.getElementById("PasswordError").innerHTML =
+            "Password requires a number.";
+        isValid = false;
+    }
+
+    // Confirm Password
+    if (confirmPassword.length === 0) {
+        document.getElementById("confirmPasswordError").innerHTML =
+            "Kindly confirm your password.";
+        isValid = false;
+    }
+    // checks if password and confirm password are the same. If not, it will say error and set isValid to false.
+    if (password !== confirmPassword) {
+        document.getElementById("confirmPasswordError").innerHTML =
+            "Passwords do not match.";
+        isValid = false;
+    }
+
+    // ===== TOPIC QUESTIONS ================================
+
+    // Dropdown
+    if (cuisine === "") {
+        document.getElementById("cuisineError").innerHTML =
+            "Kindly select a cuisine.";
+        isValid = false;
+    }
+
+    // Checkbox
+    const dietCheckboxes = document.getElementsByName("diet");
+    let isDietSelected = false;
+
+    for (let i = 0; i < dietCheckboxes.length; i++) {
+        if (dietCheckboxes[i].checked) {
+            isDietSelected = true;
+        }
+    }
+
+    if (!isDietSelected) {
+        document.getElementById("dietError").innerHTML =
+            "Select at least one dietary preference.";
+        isValid = false;
+    }
+
+    // Cook (radio)
+    const cookRadios = document.getElementsByName("cook");
+    let cookSelected = false;
+
+    for (let i = 0; i < cookRadios.length; i++) {
+        if (cookRadios[i].checked) {
+            cookSelected = true;
+        }
+    }
+
+    if (!cookSelected) {
+        document.getElementById("cookError").innerHTML =
+            "Select how many times you cook per week.";
+        isValid = false;
+    }
+    
+    // ===== FINAL RESULT ===============================
+
+    if (isValid = true ) {
+        document.getElementById("successMessage").innerHTML = "Signup successful! Eat well!";
+    }
+    }
+
+    return isValid;
+}
