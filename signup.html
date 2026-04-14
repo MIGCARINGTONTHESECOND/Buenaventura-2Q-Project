@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Signup Form</title>
+</head>
+<body>
+<form onsubmit="return validateForm()">
+
+  <!-- FULL NAME -->
+    
+   <label for="fullName">Enter your fullname:</label> <br>
+  <input type="text" id="fullName" onfocus="this.style.background='lightyellow'">
+  <span id="FnameError"></span>
+
+  <!-- BIRTHDATE -->
+   
+   <br> <label for="birthdate">Enter your birthdate:</label><br>
+  <input type="date" id="birthdate">
+  <span id="BdateError"></span>
+
+  <!-- SEX (RADIO GROUP) -->
+  
+   <br><label for="sex">Enter your sex:</label><br>
+    <input type="radio" id="male" name="sex" value="male">
+  <label for="male">Male</label><br>
+  <input type="radio" id="female" name="sex" value="female">
+  <label for="female">Female</label><br>
+  <input type="radio" id="other" name="sex" value="other">
+  <label for="other">Other</label> <br>
+  <span id="sexError"></span>
+
+  <!-- EMAIL -->
+  
+  <br> <label for="email">Enter your email:</label><br>
+  <input type="email" id="email">
+  <span id="EmailError"></span>
+
+  <!-- USERNAME -->
+ 
+   <br><label for="username">Enter a username:</label><br>
+  <input type="text" id="username">
+  <span id="UsernameError"></span>
+
+  <!-- PASSWORD -->
+
+ 
+  <br><label for="password">Enter your password:</label><br>
+  <input type="password" id="password">
+  <span id="PasswordError"></span>
+
+  
+  <!-- CONFIRM PASSWORD -->
+   
+   <br><label for="confirmPassword">Confirm your password:</label><br>
+  <input type="password" id="confirmPassword">
+  <span id="confirmPasswordError"></span>
+
+  <!-- DROPDOWN -->
+  
+
+   <br><label>What cuisine interests you most?</label><br>
+  <select id="cuisine">
+  <option value="">-- choose --</option>
+  <option value="filipino">Filipino</option>
+  <option value="japanese">Japanese</option>
+</select>
+<span id="cuisineError"></span>
+
+  <!-- CHECKBOX -->
+
+   <br><label for="diet">Enter your dietary preferences:</label><br>
+  <input type="checkbox" name="diet" value="vegan"> Vegan
+<input type="checkbox" name="diet" value="halal"> Halal
+<input type="checkbox" name="diet" value="gluten"> Gluten-free
+<span id="dietError"></span>
+
+  <!-- RADIO BUTTONS -->
+
+   <br><label for="cook" >“How many times a week do you cook?” (radio buttons)</label><br>
+   <input type="radio" id="cook1" name="cook" value="0-1">
+  <label for="cook1">0-1</label><br>
+  <input type="radio" id="cook2" name="cook" value="2-3">
+  <label for="cook2">2-3</label><br>
+  <input type="radio" id="cook3" name="cook" value="4-5">
+  <label for="cook3">4-5</label><br>
+  <input type="radio" id="cook4" name="cook" value="6+">
+  <label for="cook4">6-7</label>
+  <span id="cookError"></span>
+
+  <button type="submit">Submit</button>
+
+  <p id="successMessage"></p>
+
+</form>
+
+<script src="script.js"></script>
+</body>
+</html>
