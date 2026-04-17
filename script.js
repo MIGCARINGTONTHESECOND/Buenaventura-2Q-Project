@@ -1,5 +1,5 @@
 function validateForm(event)  {
-    event.preventDefault();
+    event.preventDefault(); //prevents default (reseting of form)
 
     // ===== assign Elements =====
 
